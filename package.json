@@ -1,0 +1,21 @@
+{
+  "name": "lambda-papertrail",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "deploy:dev": "serverless deploy --aws-profile serverless-dev --stage dev",
+    "deploy:qa": "serverless deploy --aws-profile serverless-dev --stage qa",
+    "deploy:prod": "serverless deploy --aws-profile serverless-production --stage prod"
+  },
+  "author": "David Furnes <dfurnes@dosomething.org>",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless": "^1.29.2"
+  },
+  "dependencies": {
+    "winston": "^2.0.0",
+    "winston-papertrail": "^1.0.5",
+    "zlib": "^1.0.5"
+  }
+}

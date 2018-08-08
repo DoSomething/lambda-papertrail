@@ -1,0 +1,30 @@
+# For full config options, check the docs:
+#    docs.serverless.com
+
+service: lambda-papertrail
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: us-east-1
+  environment:
+    PAPERTRAIL_HOST: ${ssm:/papertrail/${opt:stage}/host}
+    PAPERTRAIL_PORT: ${ssm:/papertrail/${opt:stage}/port}
+
+functions:
+  forwarder:
+    handler: handler.log
+
+resources:
+  Resources:
+    ForwarderLambdaPermission:
+      Type: "AWS::Lambda::Permission"
+      Properties:
+        Action: "lambda:InvokeFunction"
+        FunctionName:
+          Fn::GetAtt: [ForwarderLambdaFunction, Arn]
+        Principal: logs.${self:provider.region}.amazonaws.com
+  Outputs:
+    ForwarderLambdaArn:
+      Value:
+        Fn::GetAtt: [ForwarderLambdaFunction, Arn]
