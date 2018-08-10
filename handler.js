@@ -5,7 +5,7 @@ const zlib = require('zlib');
 const winston = require('winston');
 
 // Register Papertrail transport w/ Winston.
-require('winston-papertrail').Papertrail;
+require('winston-papertrail');
 
 module.exports.log = (event, context, callback) => {
   // Parse incoming Cloudwatch logs, which are base64-encoded & gzipped:
@@ -14,10 +14,10 @@ module.exports.log = (event, context, callback) => {
     if (err) {
       callback(err);
     } else {
-      const parsed = JSON.parse(result.toString('ascii'));
+      const json = JSON.parse(result.toString('ascii'));
 
       // Parse a human-readable hostname & program from the log group.
-      const logGroup = path.parse(parsed.logGroup);
+      const logGroup = path.parse(json.logGroup);
 
       // Configure the Papertrail connection.
       const papertrail = new winston.transports.Papertrail({
@@ -30,8 +30,8 @@ module.exports.log = (event, context, callback) => {
       });
 
       // Forward each of the log messages to Papertrail.
-      const logger = new winston.Logger({ transports: [papertrail]});
-      parsed.logEvents.forEach(event => logger.info(event.message));
+      const logger = new winston.Logger({ transports: [papertrail] });
+      json.logEvents.forEach(log => logger.info(log.message));
 
       logger.close();
       callback(null);
