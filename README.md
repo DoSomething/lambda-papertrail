@@ -45,7 +45,7 @@ custom:
     destinationARN: ${cf:lambda-papertrail-${opt:stage}.ForwarderLambdaArn}
 ```
 
-You can also manually attach a log group by clicking **Actions → Stream to AWS Lambda** from the [dashboard](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logs:).
+You can also manually attach a log group by clicking **Actions → Stream to AWS Lambda** from the [CloudWatch Log Groups dashboard](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logs:). Then just choose the appropriate destination Lambda function (e.g. `lambda-papertrail-prod-forwarder`) and configure a filter (or "Other" to forward all log messages).
 
 ## License
 
