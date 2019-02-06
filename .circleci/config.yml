@@ -1,0 +1,67 @@
+# Javascript Node CircleCI 2.1 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2.1
+
+orbs:
+  lambda: dosomething/lambda@0.0.3
+
+jobs:
+  # Install dependencies, run tests, and compile for Lambda.
+  build:
+    docker:
+      - image: circleci/node:8.10
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+      # When we're on npm 5.7+, add this back in. <https://git.io/fhMbF>
+      # - run: npm prune --production
+      - lambda/store
+
+# Configure workflows & scheduled jobs:
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - hold:
+          type: approval
+          requires:
+            - deploy-dev
+            - deploy-qa
+          filters:
+            branches:
+              only: master
+      - lambda/deploy:
+          name: deploy-dev
+          app: papertrail-dev
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      - lambda/deploy:
+          name: deploy-qa
+          app: papertrail-qa
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      - lambda/deploy:
+          name: deploy-production
+          app: papertrail
+          requires:
+            - hold
+          filters:
+            branches:
+              only: master
