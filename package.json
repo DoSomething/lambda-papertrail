@@ -32,9 +32,9 @@
     "eslint-plugin-jest": "^21.20.2",
     "husky": "^0.14.3",
     "jest": "^23.5.0",
-    "prettier": "^1.14.2",
-    "pretty-quick": "^1.6.0",
-    "serverless": "^1.30.0"
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.0",
+    "serverless": "^1.44.1"
   },
   "dependencies": {
     "winston": "^2.0.0",
