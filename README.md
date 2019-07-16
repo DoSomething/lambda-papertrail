@@ -7,8 +7,6 @@ This is **lambda-papertrail**, a Lambda function to forward logs from CloudWatch
 Requires Docker.
 
 ```sh
-# Not yet implemented.
-
 $ make tests
 ```
 
