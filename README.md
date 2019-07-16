@@ -22,8 +22,8 @@ Use the [serverless toolbox](https://github.com/Elizabeth-Warren/serverless-tool
 # `lambda-papertrail` directory on your host machine.
 $ SRC=~/dev/lambda-papertrail make toolbox
 
-$ sls deploy -f api --stage prod
-$ sls logs -f api --stage prod
+$ sls deploy -f forwarder --stage prod
+$ sls logs -f forwarder --stage prod
 ```
 
 ## Usage
