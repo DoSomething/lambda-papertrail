@@ -2,35 +2,29 @@
 
 This is **lambda-papertrail**, a Lambda function to forward logs from CloudWatch to [Papertrail](http://papertrailapp.com). It is built with the [Serverless Framework](https://serverless.com/), and is a perfect companion to the [`serverless-log-forwarding`](https://github.com/amplify-education/serverless-log-forwarding) plugin.
 
-## Getting Started
+## Local Development
 
-Install [Node](https://nodejs.org/en/) 8.x, [Docker](https://www.docker.com/docker-mac), and the [AWS CLI](https://aws.amazon.com/cli/). Then clone this repository & install dependencies:
-
-```sh
-# Install dependencies
-npm install
-
-# Run local tests:
-npm test
-```
-
-Next, configure `serverless-dev` (for dev & QA stages) and `serverless-produciton` IAM roles:
+Requires Docker.
 
 ```sh
-$ aws configure --profile serverless-dev
-AWS Access Key ID [None]: **************
-AWS Secret Access Key [None]: **************
-Default region name [None]: us-east-1
-Default output format [None]: text
+# Not yet implemented.
 
-$ aws configure --profile serverless-production
-AWS Access Key ID [None]: **************
-AWS Secret Access Key [None]: **************
-Default region name [None]: us-east-1
-Default output format [None]: text
+$ make tests
 ```
 
-Finally, run either `npm run deploy:dev`, `npm run deploy:qa`, or `npm run deploy:prod` to deploy!
+## Deployment
+
+Use the [serverless toolbox](https://github.com/Elizabeth-Warren/serverless-toolbox),
+
+```sh
+# From the `serverless-toolbox` directory,
+# Replace ~/dev/lambda-papertrail with the path to the
+# `lambda-papertrail` directory on your host machine.
+$ SRC=~/dev/lambda-papertrail make toolbox
+
+$ sls deploy -f api --stage prod
+$ sls logs -f api --stage prod
+```
 
 ## Usage
 
