@@ -31,7 +31,10 @@ module.exports.log = (event, context, callback) => {
 
       // Forward each of the log messages to Papertrail.
       const logger = new winston.Logger({ transports: [papertrail] });
-      json.logEvents.forEach(log => logger.info(log.message));
+      json.logEvents.forEach(log => {
+        msg = log.message.trim()
+        if (msg) logger.info(msg)
+      });
 
       logger.close();
       callback(null);
