@@ -5,7 +5,7 @@ service: lambda-papertrail
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   region: us-east-1
   environment:
     PAPERTRAIL_HOST: ${ssm:/papertrail/${opt:stage}/host}
@@ -18,9 +18,9 @@ functions:
 resources:
   Resources:
     ForwarderLambdaPermission:
-      Type: "AWS::Lambda::Permission"
+      Type: 'AWS::Lambda::Permission'
       Properties:
-        Action: "lambda:InvokeFunction"
+        Action: 'lambda:InvokeFunction'
         FunctionName:
           Fn::GetAtt: [ForwarderLambdaFunction, Arn]
         Principal: logs.${self:provider.region}.amazonaws.com
