@@ -14,7 +14,7 @@ module.exports.log = (event, context, callback) => {
     if (err) {
       callback(err);
     } else {
-      const json = JSON.parse(result.toString('ascii'));
+      const json = JSON.parse(result.toString('utf8'));
 
       // Parse a human-readable hostname & program from the log group.
       const logGroup = path.parse(json.logGroup);
