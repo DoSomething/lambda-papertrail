@@ -4,7 +4,7 @@ This is **lambda-papertrail**, a Lambda function to forward logs from CloudWatch
 
 ## Getting Started
 
-Install [Node](https://nodejs.org/en/) 8.x, [Docker](https://www.docker.com/docker-mac), and the [AWS CLI](https://aws.amazon.com/cli/). Then clone this repository & install dependencies:
+Install [Node](https://nodejs.org/en/) 12.x, [Docker](https://www.docker.com/docker-mac), and the [AWS CLI](https://aws.amazon.com/cli/). Then clone this repository & install dependencies:
 
 ```sh
 # Install dependencies
