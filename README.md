@@ -14,7 +14,7 @@ npm install
 npm test
 ```
 
-Next, configure `serverless-dev` (for dev & QA stages) and `serverless-produciton` IAM roles:
+Next, configure `serverless-dev` (for dev & QA stages) and `serverless-production` IAM roles:
 
 ```sh
 $ aws configure --profile serverless-dev
