@@ -9,7 +9,7 @@ require('winston-papertrail');
 
 module.exports.log = (event, context, callback) => {
   // Parse incoming Cloudwatch logs, which are base64-encoded & gzipped:
-  const payload = new Buffer(event.awslogs.data, 'base64');
+  const payload = Buffer.from(event.awslogs.data, 'base64');
   zlib.gunzip(payload, (err, result) => {
     if (err) {
       callback(err);
